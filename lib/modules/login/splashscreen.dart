@@ -66,20 +66,21 @@ class _SplashPageState extends State<SplashPage>
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              // Animated logo
+              // Animated  logo
               Image.asset(
                 'images/logo/onlylogo.png', // Your logo image path
-                height: 150, // Set height for your logo
-                width: 150, // Set width for your logo
+                height: 300, // Set height for your logo
+                width: 300,
+                fit: BoxFit.fill, // Set width for your logo
               ),
-              const SizedBox(height: 20),
+              //  const SizedBox(height: 20),
               // App name
               const Text(
-                'Refeed',
+                'ZERO WASTE',
                 style: TextStyle(
                   fontSize: 24,
                   fontWeight: FontWeight.bold,
-                  color: Colors.orange, // You can customize this
+                  color: AppColor.ornage, // You can customize this
                 ),
               ),
             ],

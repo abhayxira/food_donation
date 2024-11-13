@@ -26,7 +26,7 @@ class _AuthPageState extends State<AuthPage> {
                 height: 140,
               ),
               const Text(
-                'Refeed',
+                'ZERO WASTE',
                 style: TextStyle(
                   fontSize: 48,
                   fontWeight: FontWeight.bold,

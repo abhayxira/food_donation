@@ -52,6 +52,15 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
   Widget build(BuildContext context) {
     return Scaffold(
       // appBar: AppBar(
+      //     // title: Container(
+      //     //   decoration: BoxDecoration(borderRadius: BorderRadius.circular(23)),
+      //     //   child: const CircleAvatar(
+      //     //     child: Icon(Icons.arrow_back),
+      //     //   ),
+      //     // ),
+
+      //     ),
+      // appBar: AppBar(
       //   title: Text('Donate Food', style: TextStyle(color: AppColor.white)),
       //   flexibleSpace: Container(
       //     decoration: BoxDecoration(
@@ -84,9 +93,9 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
                   const SizedBox(height: 24),
                   _buildMealTypeSection(),
                   const SizedBox(height: 24),
-                  _buildVehicleTypeSection(),
-                  const SizedBox(height: 24),
                   _buildFoodQuantitySlider(),
+                  const SizedBox(height: 24),
+                  _buildVehicleTypeSection(),
                   const SizedBox(height: 32),
                   _buildSubmitButton(),
                 ],
@@ -126,15 +135,30 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
       child: const Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Center(
-            child: Text(
-              'Make a Difference',
-              style: TextStyle(
-                color: Colors.white,
-                fontSize: 24,
-                fontWeight: FontWeight.bold,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              InkWell(
+                child: CircleAvatar(
+                  foregroundColor: AppColor.white,
+                  backgroundColor: AppColor.ornage,
+                  child: Icon(Icons.arrow_back),
+                ),
               ),
-            ),
+              SizedBox(
+                width: 30,
+              ),
+              Center(
+                child: Text(
+                  'Make a Difference',
+                  style: TextStyle(
+                    color: Colors.white,
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+              ),
+            ],
           ),
           SizedBox(height: 8),
           Center(
@@ -326,7 +350,7 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        const Text('Food Quantity',
+        const Text('Food Quantity as par person',
             style: TextStyle(fontSize: 18, fontWeight: FontWeight.bold)),
         const SizedBox(height: 8),
         Row(
@@ -340,7 +364,7 @@ class _FoodDonationFormState extends State<FoodDonationForm> {
                 divisions: 100,
                 activeColor: AppColor.ornage,
                 inactiveColor: Colors.grey[300],
-                label: '${foodQuantity.round()} servings',
+                label: '${foodQuantity.round()} person',
                 onChanged: (value) => setState(() => foodQuantity = value),
               ),
             ),

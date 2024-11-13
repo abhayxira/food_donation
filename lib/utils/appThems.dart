@@ -11,4 +11,5 @@ class AppColor {
   ];
   static const Color grey = Colors.grey;
   static const Color LightOrnage = Color.fromARGB(255, 255, 197, 121);
+  static const Color blue = Colors.blue;
 }
