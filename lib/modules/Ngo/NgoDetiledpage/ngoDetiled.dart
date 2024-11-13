@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:food_donation/utils/appThems.dart';
 
 class NGODetailsPage extends StatelessWidget {
   const NGODetailsPage({super.key});
@@ -17,6 +18,24 @@ class NGODetailsPage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          ' Ngo Detiled',
+          style: TextStyle(
+              fontSize: 22, fontWeight: FontWeight.bold, color: AppColor.white),
+        ),
+        iconTheme: const IconThemeData(color: Colors.white),
+        flexibleSpace: Container(
+          decoration: const BoxDecoration(
+            gradient: LinearGradient(
+              begin: Alignment.topLeft,
+              end: Alignment.bottomRight,
+              colors: AppColor.appbarColors,
+            ),
+          ),
+        ),
+        elevation: 4,
+      ),
       body: SafeArea(
         child: SingleChildScrollView(
           child: Column(
@@ -27,7 +46,7 @@ class NGODetailsPage extends StatelessWidget {
                 width: double.infinity,
                 decoration: const BoxDecoration(
                   image: DecorationImage(
-                    image: AssetImage('assets/ngo_building.jpg'),
+                    image: AssetImage('images/food donation.jpg'),
                     fit: BoxFit.cover,
                   ),
                 ),
@@ -46,9 +65,7 @@ class NGODetailsPage extends StatelessWidget {
                     ),
                     const Text(
                       'Est. 1984',
-                      style: TextStyle(
-                        color: Colors.grey,
-                      ),
+                      style: TextStyle(color: AppColor.grey),
                     ),
                     const SizedBox(height: 16),
                     Row(
@@ -56,7 +73,7 @@ class NGODetailsPage extends StatelessWidget {
                         const CircleAvatar(
                           radius: 25,
                           backgroundImage:
-                              AssetImage('assets/founder_avatar.jpg'),
+                              AssetImage('images/ngologo/logo1.jpg'),
                         ),
                         const SizedBox(width: 12),
                         const Expanded(
@@ -104,7 +121,7 @@ class NGODetailsPage extends StatelessWidget {
                     const SizedBox(height: 16),
                     const Row(
                       children: [
-                        Icon(Icons.people, color: Colors.blue),
+                        Icon(Icons.people, color: AppColor.ornage),
                         SizedBox(width: 8),
                         Text('Served over 1k+ people'),
                       ],
@@ -112,7 +129,7 @@ class NGODetailsPage extends StatelessWidget {
                     const SizedBox(height: 16),
                     Row(
                       children: [
-                        const Icon(Icons.phone, color: Colors.blue),
+                        const Icon(Icons.phone, color: AppColor.ornage),
                         const SizedBox(width: 8),
                         const Text('91+ 9123456789'),
                         IconButton(
@@ -134,12 +151,12 @@ class NGODetailsPage extends StatelessWidget {
         child: ElevatedButton(
           onPressed: () {},
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.blue,
+            backgroundColor: AppColor.ornage,
             minimumSize: const Size(double.infinity, 50),
           ),
           child: const Text(
             'Select NGO',
-            style: TextStyle(fontSize: 18),
+            style: TextStyle(fontSize: 18, color: AppColor.white),
           ),
         ),
       ),

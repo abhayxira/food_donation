@@ -36,7 +36,7 @@ class _SignupPageState extends State<SignupPage> {
                 children: [
                   const SizedBox(height: 40),
                   const Text(
-                    'refeed',
+                    'ZERO WASTE',
                     style: TextStyle(
                       fontSize: 48,
                       fontWeight: FontWeight.bold,
@@ -81,6 +81,7 @@ class _SignupPageState extends State<SignupPage> {
                   IntlPhoneField(
                     decoration: InputDecoration(
                       labelText: 'Phone Number',
+                      labelStyle: const TextStyle(fontWeight: FontWeight.bold),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: const BorderSide(color: AppColor.ornage),
@@ -140,8 +141,8 @@ class _SignupPageState extends State<SignupPage> {
                     decoration: InputDecoration(
                       labelText: 'Confirm Password',
                       hintText: 'Confirm your password',
-                      prefixIcon:
-                          const Icon(Icons.lock_outline, color: AppColor.ornage),
+                      prefixIcon: const Icon(Icons.lock_outline,
+                          color: AppColor.ornage),
                       suffixIcon: IconButton(
                         icon: Icon(
                           _isConfirmPasswordVisible
@@ -183,11 +184,17 @@ class _SignupPageState extends State<SignupPage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        // Handle sign up
+                        
                         print('Name: $_name');
                         print('Phone: $_phoneNumber');
                         print('Password: $_password');
                       }
+                       Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) =>
+                                    const HomePage()), // Replace with your home screen widget
+                          );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.ornage,
@@ -216,7 +223,7 @@ class _SignupPageState extends State<SignupPage> {
                   const SizedBox(height: 20),
                   OutlinedButton.icon(
                     onPressed: () {
-                      // Handle Google sign up
+                     
                     },
                     icon: Image.asset('images/googleLogo.png', height: 24),
                     label: const Text('Sign up with Google',
