@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:food_donation/home/home.dart';
 import 'package:food_donation/modules/login/SignupPage.dart';
 import 'package:food_donation/utils/appThems.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -14,7 +13,7 @@ class LoginPage extends StatefulWidget {
 class _LoginPageState extends State<LoginPage> {
   bool _isPasswordVisible = false;
   bool _isLoading = false;
-  String _phoneNumber = '';
+  String _email = '';
   String _password = '';
   final _formKey = GlobalKey<FormState>();
 
@@ -24,10 +23,9 @@ class _LoginPageState extends State<LoginPage> {
         _isLoading = true;
       });
 
-      // Simulate network delay
       await Future.delayed(const Duration(seconds: 2));
 
-      if (_phoneNumber == '8155916177' && _password == '@Abhay2003') {
+      if (_email == 'abhayxira@gmail.com' && _password == '@Abhay2003') {
         Navigator.pushReplacement(
           context,
           MaterialPageRoute(builder: (context) => const HomePage()),
@@ -37,13 +35,12 @@ class _LoginPageState extends State<LoginPage> {
           _isLoading = false;
         });
         
-        // Show error dialog
         showDialog(
           context: context,
           builder: (BuildContext context) {
             return AlertDialog(
               title: const Text('Login Failed'),
-              content: const Text('Incorrect phone number or password.'),
+              content: const Text('Incorrect email or password.'),
               actions: [
                 TextButton(
                   onPressed: () => Navigator.pop(context),
@@ -88,9 +85,9 @@ class _LoginPageState extends State<LoginPage> {
                     textAlign: TextAlign.center,
                   ),
                   const SizedBox(height: 40),
-                  IntlPhoneField(
+                  TextFormField(
                     decoration: InputDecoration(
-                      labelText: 'Phone Number',
+                      labelText: 'Email',
                       labelStyle: const TextStyle(color: AppColor.black),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
@@ -100,15 +97,18 @@ class _LoginPageState extends State<LoginPage> {
                         borderRadius: BorderRadius.circular(10),
                         borderSide: const BorderSide(color: AppColor.ornage, width: 2),
                       ),
-                      prefixIcon: const Icon(Icons.phone, color: AppColor.ornage),
+                      prefixIcon: const Icon(Icons.email, color: AppColor.ornage),
                     ),
-                    initialCountryCode: 'IN',
-                    onChanged: (phone) {
-                      _phoneNumber = phone.number;
+                    keyboardType: TextInputType.emailAddress,
+                    onChanged: (value) {
+                      _email = value;
                     },
-                    validator: (phone) {
-                      if (phone == null || phone.number.isEmpty) {
-                        return 'Please enter a phone number';
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                        return 'Please enter a valid email';
                       }
                       return null;
                     },
@@ -154,9 +154,7 @@ class _LoginPageState extends State<LoginPage> {
                   Align(
                     alignment: Alignment.centerRight,
                     child: TextButton(
-                      onPressed: () {
-                        // Handle change password
-                      },
+                      onPressed: () {},
                       child: const Text(
                         'Change Password',
                         style: TextStyle(
@@ -200,9 +198,7 @@ class _LoginPageState extends State<LoginPage> {
                   ),
                   const SizedBox(height: 20),
                   OutlinedButton.icon(
-                    onPressed: () {
-                      // Handle Google sign in
-                    },
+                    onPressed: () {},
                     icon: Image.asset('images/googleLogo.png', height: 24),
                     label: const Text('Sign in with Google'),
                     style: OutlinedButton.styleFrom(

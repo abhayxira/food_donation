@@ -87,9 +87,9 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
           controller: _tabController,
           children: [
             _buildHomeTab(),
-          const  FoodDonationForm(),
-          const  NgoListScreen(),
-          const  ProfilePage(),
+            const FoodDonationForm(),
+            const NgoListScreen(),
+            const ProfilePage(),
           ],
         ),
       ),
@@ -327,7 +327,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             Navigator.push(
                                 context,
                                 MaterialPageRoute(
-                                    builder: (context) => const FoodDonationForm()));
+                                    builder: (context) =>
+                                        const FoodDonationForm()));
                           },
                           style: ElevatedButton.styleFrom(
                             backgroundColor: AppColor.white,
@@ -530,8 +531,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       ClipRRect(
-                        borderRadius:
-                            const BorderRadius.vertical(top: Radius.circular(12)),
+                        borderRadius: const BorderRadius.vertical(
+                            top: Radius.circular(12)),
                         child: Image.asset(
                           ngoData[index]['image'],
                           height: 120,
@@ -575,7 +576,8 @@ class _HomePageState extends State<HomePage> with TickerProviderStateMixin {
                             const SizedBox(height: 8),
                             Row(
                               children: [
-                                const Icon(Icons.star, color: Colors.amber, size: 18),
+                                const Icon(Icons.star,
+                                    color: Colors.amber, size: 18),
                                 const SizedBox(width: 4),
                                 Text(
                                   '${ngoData[index]['rating']}',

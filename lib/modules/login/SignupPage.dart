@@ -2,13 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:food_donation/home/home.dart';
 import 'package:food_donation/modules/login/login.dart';
 import 'package:food_donation/utils/appThems.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
 
 class SignupPage extends StatefulWidget {
   const SignupPage({super.key});
 
   @override
-  // ignore: library_private_types_in_public_api
   _SignupPageState createState() => _SignupPageState();
 }
 
@@ -18,7 +16,7 @@ class _SignupPageState extends State<SignupPage> {
   bool _isConfirmPasswordVisible = false;
 
   String? _name;
-  String? _phoneNumber;
+  String? _email;
   String? _password;
   String? _confirmPassword;
 
@@ -57,16 +55,14 @@ class _SignupPageState extends State<SignupPage> {
                     decoration: InputDecoration(
                       labelText: 'Name',
                       hintText: 'Enter your full name',
-                      prefixIcon:
-                          const Icon(Icons.person, color: AppColor.ornage),
+                      prefixIcon: const Icon(Icons.person, color: AppColor.ornage),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: const BorderSide(color: AppColor.ornage),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide:
-                            const BorderSide(color: AppColor.ornage, width: 2),
+                        borderSide: const BorderSide(color: AppColor.ornage, width: 2),
                       ),
                     ),
                     validator: (value) {
@@ -78,37 +74,41 @@ class _SignupPageState extends State<SignupPage> {
                     onSaved: (value) => _name = value,
                   ),
                   const SizedBox(height: 15),
-                  IntlPhoneField(
+                  TextFormField(
                     decoration: InputDecoration(
-                      labelText: 'Phone Number',
-                      labelStyle: const TextStyle(fontWeight: FontWeight.bold),
+                      labelText: 'Email',
+                      hintText: 'Enter your email',
+                      prefixIcon: const Icon(Icons.email, color: AppColor.ornage),
                       border: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
                         borderSide: const BorderSide(color: AppColor.ornage),
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide:
-                            const BorderSide(color: AppColor.ornage, width: 2),
+                        borderSide: const BorderSide(color: AppColor.ornage, width: 2),
                       ),
                     ),
-                    initialCountryCode: 'IN',
-                    onChanged: (phone) {
-                      _phoneNumber = phone.completeNumber;
+                    keyboardType: TextInputType.emailAddress,
+                    validator: (value) {
+                      if (value == null || value.isEmpty) {
+                        return 'Please enter your email';
+                      }
+                      if (!RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$').hasMatch(value)) {
+                        return 'Please enter a valid email';
+                      }
+                      return null;
                     },
+                    onSaved: (value) => _email = value,
                   ),
                   const SizedBox(height: 15),
                   TextFormField(
                     decoration: InputDecoration(
                       labelText: 'Password',
                       hintText: 'Enter your password',
-                      prefixIcon:
-                          const Icon(Icons.lock, color: AppColor.ornage),
+                      prefixIcon: const Icon(Icons.lock, color: AppColor.ornage),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isPasswordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                          _isPasswordVisible ? Icons.visibility : Icons.visibility_off,
                           color: AppColor.ornage,
                         ),
                         onPressed: () {
@@ -123,8 +123,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide:
-                            const BorderSide(color: AppColor.ornage, width: 2),
+                        borderSide: const BorderSide(color: AppColor.ornage, width: 2),
                       ),
                     ),
                     obscureText: !_isPasswordVisible,
@@ -141,19 +140,15 @@ class _SignupPageState extends State<SignupPage> {
                     decoration: InputDecoration(
                       labelText: 'Confirm Password',
                       hintText: 'Confirm your password',
-                      prefixIcon: const Icon(Icons.lock_outline,
-                          color: AppColor.ornage),
+                      prefixIcon: const Icon(Icons.lock_outline, color: AppColor.ornage),
                       suffixIcon: IconButton(
                         icon: Icon(
-                          _isConfirmPasswordVisible
-                              ? Icons.visibility
-                              : Icons.visibility_off,
+                          _isConfirmPasswordVisible ? Icons.visibility : Icons.visibility_off,
                           color: AppColor.ornage,
                         ),
                         onPressed: () {
                           setState(() {
-                            _isConfirmPasswordVisible =
-                                !_isConfirmPasswordVisible;
+                            _isConfirmPasswordVisible = !_isConfirmPasswordVisible;
                           });
                         },
                       ),
@@ -163,8 +158,7 @@ class _SignupPageState extends State<SignupPage> {
                       ),
                       focusedBorder: OutlineInputBorder(
                         borderRadius: BorderRadius.circular(10),
-                        borderSide:
-                            const BorderSide(color: AppColor.ornage, width: 2),
+                        borderSide: const BorderSide(color: AppColor.ornage, width: 2),
                       ),
                     ),
                     obscureText: !_isConfirmPasswordVisible,
@@ -184,17 +178,14 @@ class _SignupPageState extends State<SignupPage> {
                     onPressed: () {
                       if (_formKey.currentState!.validate()) {
                         _formKey.currentState!.save();
-                        
                         print('Name: $_name');
-                        print('Phone: $_phoneNumber');
+                        print('Email: $_email');
                         print('Password: $_password');
+                        Navigator.push(
+                          context,
+                          MaterialPageRoute(builder: (context) => const HomePage()),
+                        );
                       }
-                       Navigator.push(
-                            context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const HomePage()), // Replace with your home screen widget
-                          );
                     },
                     style: ElevatedButton.styleFrom(
                       backgroundColor: AppColor.ornage,
@@ -214,20 +205,16 @@ class _SignupPageState extends State<SignupPage> {
                       Expanded(child: Divider(color: AppColor.ornage)),
                       Padding(
                         padding: EdgeInsets.symmetric(horizontal: 8.0),
-                        child: Text('OR',
-                            style: TextStyle(color: AppColor.ornage)),
+                        child: Text('OR', style: TextStyle(color: AppColor.ornage)),
                       ),
                       Expanded(child: Divider(color: AppColor.ornage)),
                     ],
                   ),
                   const SizedBox(height: 20),
                   OutlinedButton.icon(
-                    onPressed: () {
-                     
-                    },
+                    onPressed: () {},
                     icon: Image.asset('images/googleLogo.png', height: 24),
-                    label: const Text('Sign up with Google',
-                        style: TextStyle(color: AppColor.black)),
+                    label: const Text('Sign up with Google', style: TextStyle(color: AppColor.black)),
                     style: OutlinedButton.styleFrom(
                       side: const BorderSide(color: AppColor.ornage),
                       padding: const EdgeInsets.symmetric(vertical: 12),
@@ -244,25 +231,19 @@ class _SignupPageState extends State<SignupPage> {
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const LoginPage()), // Replace with your home screen widget
+                            MaterialPageRoute(builder: (context) => const LoginPage()),
                           );
                         },
                         style: TextButton.styleFrom(
                           foregroundColor: AppColor.ornage,
                         ),
-                        child: const Text(
-                          'Log in',
-                        ),
+                        child: const Text('Log in'),
                       ),
                       TextButton(
                         onPressed: () {
                           Navigator.push(
                             context,
-                            MaterialPageRoute(
-                                builder: (context) =>
-                                    const HomePage()), // Replace with your home screen widget
+                            MaterialPageRoute(builder: (context) => const HomePage()),
                           );
                         },
                         style: TextButton.styleFrom(
